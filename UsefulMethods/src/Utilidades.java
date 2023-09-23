@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 
 public class Utilidades { // Exercise 01
 	
 	
-	public static int somatoria(int[] vetor) {
+	public int Somatoria(int[] vetor) {
 		int initialLimit = 2;
 		int finalLimit = 2;
 		int total = 0;
@@ -18,7 +19,7 @@ public class Utilidades { // Exercise 01
 	
 	
 	
-	public static void pairNumbers(int number1, int number2) { //Exercise02
+	public void PairNumbers(int number1, int number2) { //Exercise02
 		int cont = number1;
 		int contFinal = number2;
 		
@@ -40,7 +41,7 @@ public class Utilidades { // Exercise 01
 	
 	
 	
-	public static float mediaReal(int[] entrada1, int[] entrada2) { // Exercise03
+	public float MediaReal(int[] entrada1, int[] entrada2) { // Exercise03
 		float somaElementar = 0;
 		float mediaElementar;
 		int divisorElementar = 2;
@@ -60,7 +61,7 @@ public class Utilidades { // Exercise 01
 	
 	
 	
-	public static float mediaPonderadaReal(float notas[], int pesos[]) { // Exercise04
+	public float MediaPonderadaReal(float notas[], int pesos[]) { // Exercise04
 		float somaElementar = 0;
 		float mediaPonderadaElementar = 0;
 		int somatoriaPesos = 0;
@@ -84,7 +85,7 @@ public class Utilidades { // Exercise 01
 	
 	
 	
-	public static int contadorElementar(int[] elementos1, int[] elementos2, int elementoModa) { // Exercise05
+	public int ContadorElementar(int[] elementos1, int[] elementos2, int elementoModa) { // Exercise05
 		int incidence = 0;
 		
 		for (int i = 0; i < elementos1.length; i++) {
@@ -105,7 +106,7 @@ public class Utilidades { // Exercise 01
 	
 	
 	
-	public static int[] vetCpy(int[] object) { // Exercise06
+	public int[] VetCpy(int[] object) { // Exercise06
 		int limit = object.length;
 		int[] copy = new int[limit];
 		
@@ -120,7 +121,7 @@ public class Utilidades { // Exercise 01
 	
 	
 	
-	public static int[] order(int[] vector) { // Exercise07
+	public int[] Order(int[] vector) { // Exercise07
 		int limit = vector.length;
 		boolean condition = false;
 		
@@ -135,7 +136,7 @@ public class Utilidades { // Exercise 01
 		}
 		
 		if (condition) {
-		order(vector);
+		Order(vector);
 		}
 		
 		return vector;
@@ -144,7 +145,7 @@ public class Utilidades { // Exercise 01
 	
 	
 	
-	public static boolean orderVector(int[] vector) { // Exercise08
+	public boolean OrderVector(int[] vector) { // Exercise08
 		int limit = vector.length;
 		boolean condition = false;
 		
@@ -158,60 +159,262 @@ public class Utilidades { // Exercise 01
 		}
 		
 		if (condition) {
-		order(vector);
+		Order(vector);
 		}
 		
 		return condition;
 	}
 
 	
+	// Exercise 09
+	 public int KthLargestElement(int[] vetor, int k) {
+	        ArrayList<Integer> valueUnits = new ArrayList<>();
+
+	        for (int num : vetor) {
+	            if (!valueUnits.contains(num)) {
+	                valueUnits.add(num);
+	            }
+	        }
+
+	        if (k <= 0 || k > valueUnits.size()) {	    
+	        	System.out.println("Invalid K");
+	        }
+
+	        int KEsimoMaior = valueUnits.size() - k;
+
+	        return valueUnits.get(KEsimoMaior);
+	    }	
 	
-	
-	
-	public static int elementoModa(int[] vector, int k) {
-		// int numberModa = k;
-		int[][] ranking = new int[vector.length][vector.length];
-		
-		for(int i = 0; i < vector.length; i++) {
-			int contador = 0;
-			for(int j = 0; j < vector.length; j++) {
-				if(vector[i] == vector[j]) {
-						contador += 1;
-						ranking[i][j] = contador;
-				}
-				ranking[i+1][j] = vector[j];
-			}
+
+	 
+	 
+	 // Exercise 10
+	 public int KthSmallestElement (int[] vetor, int k) {
+	        if (k <= 0 || k > vetor.length) {
+	            return -1; // Valor de k fora do intervalo, retornamos um valor padrão
+	        }
+
+	        OrderVector(vetor); // Ordenamos o vetor em ordem crescente
+	        return vetor[k - 1]; // O K-ésimo menor valor estará na posição k - 1
+	    }
+	 
+	 
+	 
+	 // Exercise 11
+	 public boolean VerifyEqualVector (int vet[], int otherVet[]) {
+		 for (int i : vet) {
+			 if(otherVet[i] != vet[i]) {
+				 return false; 
+			 }
+		 }
+		 return true;
+	 }
+	 
+	 
+	 // Exercise 12
+	 public double Potentiation (double base, double expoent) {
+		 double total = base;
+		 // expoent = 0
+		 if (expoent == 0) {
+			return 1;
+		 }
+		 
+		 // expoent > 0
+		 if (expoent > 0) {
+			 for(int i = 1; i <= expoent; i++) {
+				 total = total * base; 
+			 }
+		 }
+		 
+		 // expoent < 0
+		 if (expoent < 0) {
+			 for(int i = 1; i <= expoent; i++) {
+				 total = 1/(total * base); 
+			 }
+		 }
+		 
+		 return total;
+	 }
+	 
+	 
+	 // Exercise 13
+	 public void verifyPrimeNoRutrn(int k) {
+		    if (k <= 1) {
+		        return;
+		    }
+		    for (int i = 2; i * i <= k; i++) {
+		        if (k % i == 0) {
+		            return; // Encontrou um divisor, não é primo
+		        }
+		    }
+		    return;
 		}
-		
-//		for (int i = 0; i < ranking.length - 1; i++) {
-//	        for (int j = i + 1; j < ranking.length; j++) {
-//	            if (ranking[i] < ranking[j]) {
-//	                int tempRanking = ranking[i];
-//	                int tempKeeper = keeper[i];
-//
-//	                ranking[i] = ranking[j];
-//	                keeper[i] = keeper[j];
-//
-//	                ranking[j] = tempRanking;
-//	                keeper[j] = tempKeeper;
-//	            }
-//	        }
-//	    }
-		
-		return ranking[k-1][k];
-	}
-	
-	
-	
 
-	public static void main(String[] args) {
-		int vet1[] = {9, 8, 7, 8, 1, 2};
-		//int vet2[] = {1, 2, 4, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6};
-		
-			QuickSort order = new QuickSort(vet1, 0, vet1.length - 1);
+	 
+	 
+	 // Exercise 14
+	 public ArrayList<Integer> frequency (int[] vetA, int[] vetB) {
+		 ArrayList <Integer> numbers = new ArrayList<Integer>();
+		 int lengthA = vetA.length;
+		 int lengthB = vetB.length;
+		 int defaultLength = lengthA;
+		 
+		 if (lengthB > lengthA)  {
+			 defaultLength = lengthB;
+		 }
+		 for (int i = 0; i < defaultLength; i++) {
+			 for (int j = 0; j < defaultLength; j++) {
+				 if (vetA[i] == vetB[j]) {
+				 numbers.add(vetA[i]);
+				 }
+			 }
+		 }
+		 
+		 return numbers;
+	 }
+	 
+	 
+	 
+	 
+	 // Exercise 15
+	 public ArrayList<Integer> removeNumber (int[] vetA, int k) {
+		 ArrayList <Integer> numbers = new ArrayList<Integer>();
+		 int lengthA = vetA.length;
+		 int defaultLength = lengthA;
+		 
+		 for (int i = 0; i < defaultLength; i++) {
+				 if (vetA[i] != k) {
+				 numbers.add(vetA[i]);
+				 }
+		 }
+		 
+		 return numbers;
+	 }
+	 
+	 
+	 
+	 
+	 // Exercise 16
+	 public boolean verifyPalindrome (int[] vet) {
+		 int j = vet.length;
+		 for (int i = 0; i < vet.length; i++) {
+				 if (vet[i] == vet[j]) {
+				 j--;
+				 } else {
+					 return false;
+				 }
+		 }
+		 
+		 return true;
+	 }
+	 
+	 
+	 
+	 
+	 // Exercise 17
+	 public boolean verifyPrime(int k) {
+		    if (k <= 1) {
+		        return false;
+		    }
+		    for (int i = 2; i * i <= k; i++) {
+		        if (k % i == 0) {
+		            return false; // Encontrou um divisor, não é primo
+		        }
+		    }
+		    return true;
+		}
+	 
+	 
+	 
+	 
+	 // Exercise 18
+//	 public String invertString (String string) {
+//		 int lengthA = vetA.length;
+//		 int defaultLength = lengthA;
+//		 
+//		 for (int i = 0; i < defaultLength; i++) {
+//				 if (vetA[i] != k) {
+//				 numbers.add(vetA[i]);
+//				 }
+//		 }
+//		 
+//		 return String;
+//	 }
+	 
+	 
+	 
+	 
+	 
+	 // Exercise 19
+	 public double CompoundInterest (double valorInitial, double rate, int period) {		 
+		 double realRate = rate/100;
+		 int capitalization = 12;
+		 
+		 // calculo
+		 double amount = (valorInitial*Potentiation((1 + (realRate/capitalization)), (capitalization*period)));
+		 
+		 return amount;
+	 }
+	 
+	 
+	 
+	 // Exercise 20
+	 public boolean perfectNumber (int number) {
+		 if (number <= 1) {
+	            return false;
+	        }
 
-			System.out.println((vet1, 2));
+	        int sum = 1;
 
-	}
-	
+	        for (int i = 2; i <= number / 2; i++) {
+	            if (number % i == 0) {
+	                sum += i;
+	            }
+	        }
+
+	        return sum == number;
+	 }
+	 
+	 
+	 
+	 // Exercise 21
+	 public void shrinkVector (int length) {
+		 if (length < 0) {
+			 return;
+		 }
+		 
+		 int index = length;
+		 int vector[] = new int[index];
+		 
+		 do {
+			 for (int i = length; i <= 1; i--) {
+				 index = i;
+			 }
+			 
+		 } while (vector.length != 1); 
+	 }
+	 
+	 
+	 
+	 
+	 // Exercise 22
+	 public void imprimirForma(int linhas, int colunas) {
+	        for (int i = 0; i < linhas; i++) {
+	            for (int j = 0; j <= i; j++) {
+	                System.out.print(j + " ");
+	            }
+	            System.out.println();
+	        }
+
+	        System.out.println();
+
+	        char[] caracteres = {'@', '*'};
+	        for (int i = 0; i < linhas; i++) {
+	            for (int j = 0; j < colunas; j++) {
+	                System.out.print(caracteres[(i + j) % 2] + " ");
+	            }
+	            System.out.println();
+	        }
+	    }
+	 
 }
